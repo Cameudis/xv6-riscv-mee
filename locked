@@ -1,0 +1,176 @@
+[35m[KMakefile[m[K[36m[K-[m[K[32m[K168[m[K[36m[K-[m[KQEMUOPTS += -drive file=fs.img,if=none,format=raw,id=x0
+[35m[KMakefile[m[K[36m[K:[m[K[32m[K169[m[K[36m[K:[m[KQEMUOPTS += -device virtio-b[01;31m[Klk-[m[Kdevice,drive=x0,bus=virtio-mmio-bus.0
+[35m[KMakefile[m[K[36m[K-[m[K[32m[K170[m[K[36m[K-[m[K
+[36m[K--[m[K
+[35m[Kkernel/virtio_disk.c[m[K[36m[K-[m[K[32m[K4[m[K[36m[K-[m[K//
+[35m[Kkernel/virtio_disk.c[m[K[36m[K:[m[K[32m[K5[m[K[36m[K:[m[K// qemu ... -drive file=fs.img,if=none,format=raw,id=x0 -device virtio-b[01;31m[Klk-[m[Kdevice,drive=x0,bus=virtio-mmio-bus.0
+[35m[Kkernel/virtio_disk.c[m[K[36m[K-[m[K[32m[K6[m[K[36m[K-[m[K//
+[36m[K--[m[K
+[35m[Kkernel/sleeplock.c[m[K[36m[K-[m[K[32m[K14[m[K[36m[K-[m[K{
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K15[m[K[36m[K:[m[K  initlock(&[01;31m[Klk-[m[K>lk, "sleep lock");
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K16[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>name = name;
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K17[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>locked = 0;
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K18[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>pid = 0;
+[35m[Kkernel/sleeplock.c[m[K[36m[K-[m[K[32m[K19[m[K[36m[K-[m[K}
+[36m[K--[m[K
+[35m[Kkernel/sleeplock.c[m[K[36m[K-[m[K[32m[K23[m[K[36m[K-[m[K{
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K24[m[K[36m[K:[m[K  acquire(&[01;31m[Klk-[m[K>lk);
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K25[m[K[36m[K:[m[K  while ([01;31m[Klk-[m[K>locked) {
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K26[m[K[36m[K:[m[K    sleep(lk, &[01;31m[Klk-[m[K>lk);
+[35m[Kkernel/sleeplock.c[m[K[36m[K-[m[K[32m[K27[m[K[36m[K-[m[K  }
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K28[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>locked = 1;
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K29[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>pid = myproc()->pid;
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K30[m[K[36m[K:[m[K  release(&[01;31m[Klk-[m[K>lk);
+[35m[Kkernel/sleeplock.c[m[K[36m[K-[m[K[32m[K31[m[K[36m[K-[m[K}
+[36m[K--[m[K
+[35m[Kkernel/sleeplock.c[m[K[36m[K-[m[K[32m[K35[m[K[36m[K-[m[K{
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K36[m[K[36m[K:[m[K  acquire(&[01;31m[Klk-[m[K>lk);
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K37[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>locked = 0;
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K38[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>pid = 0;
+[35m[Kkernel/sleeplock.c[m[K[36m[K-[m[K[32m[K39[m[K[36m[K-[m[K  wakeup(lk);
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K40[m[K[36m[K:[m[K  release(&[01;31m[Klk-[m[K>lk);
+[35m[Kkernel/sleeplock.c[m[K[36m[K-[m[K[32m[K41[m[K[36m[K-[m[K}
+[36m[K--[m[K
+[35m[Kkernel/sleeplock.c[m[K[36m[K-[m[K[32m[K47[m[K[36m[K-[m[K  
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K48[m[K[36m[K:[m[K  acquire(&[01;31m[Klk-[m[K>lk);
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K49[m[K[36m[K:[m[K  r = [01;31m[Klk-[m[K>locked && ([01;31m[Klk-[m[K>pid == myproc()->pid);
+[35m[Kkernel/sleeplock.c[m[K[36m[K:[m[K[32m[K50[m[K[36m[K:[m[K  release(&[01;31m[Klk-[m[K>lk);
+[35m[Kkernel/sleeplock.c[m[K[36m[K-[m[K[32m[K51[m[K[36m[K-[m[K  return r;
+[36m[K--[m[K
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K13[m[K[36m[K-[m[K{
+[35m[Kkernel/spinlock.c[m[K[36m[K:[m[K[32m[K14[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>name = name;
+[35m[Kkernel/spinlock.c[m[K[36m[K:[m[K[32m[K15[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>locked = 0;
+[35m[Kkernel/spinlock.c[m[K[36m[K:[m[K[32m[K16[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>cpu = 0;
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K17[m[K[36m[K-[m[K}
+[36m[K--[m[K
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K29[m[K[36m[K-[m[K  //   a5 = 1
+[35m[Kkernel/spinlock.c[m[K[36m[K:[m[K[32m[K30[m[K[36m[K:[m[K  //   s1 = &[01;31m[Klk-[m[K>locked
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K31[m[K[36m[K-[m[K  //   amoswap.w.aq a5, a5, (s1)
+[35m[Kkernel/spinlock.c[m[K[36m[K:[m[K[32m[K32[m[K[36m[K:[m[K  while(__sync_lock_test_and_set(&[01;31m[Klk-[m[K>locked, 1) != 0)
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K33[m[K[36m[K-[m[K    ;
+[36m[K--[m[K
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K41[m[K[36m[K-[m[K  // Record info about lock acquisition for holding() and debugging.
+[35m[Kkernel/spinlock.c[m[K[36m[K:[m[K[32m[K42[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>cpu = mycpu();
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K43[m[K[36m[K-[m[K}
+[36m[K--[m[K
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K51[m[K[36m[K-[m[K
+[35m[Kkernel/spinlock.c[m[K[36m[K:[m[K[32m[K52[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>cpu = 0;
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K53[m[K[36m[K-[m[K
+[36m[K--[m[K
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K61[m[K[36m[K-[m[K
+[35m[Kkernel/spinlock.c[m[K[36m[K:[m[K[32m[K62[m[K[36m[K:[m[K  // Release the lock, equivalent to [01;31m[Klk-[m[K>locked = 0.
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K63[m[K[36m[K-[m[K  // This code doesn't use a C assignment, since the C standard
+[36m[K--[m[K
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K66[m[K[36m[K-[m[K  // On RISC-V, sync_lock_release turns into an atomic swap:
+[35m[Kkernel/spinlock.c[m[K[36m[K:[m[K[32m[K67[m[K[36m[K:[m[K  //   s1 = &[01;31m[Klk-[m[K>locked
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K68[m[K[36m[K-[m[K  //   amoswap.w zero, zero, (s1)
+[35m[Kkernel/spinlock.c[m[K[36m[K:[m[K[32m[K69[m[K[36m[K:[m[K  __sync_lock_release(&[01;31m[Klk-[m[K>locked);
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K70[m[K[36m[K-[m[K
+[36m[K--[m[K
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K79[m[K[36m[K-[m[K  int r;
+[35m[Kkernel/spinlock.c[m[K[36m[K:[m[K[32m[K80[m[K[36m[K:[m[K  r = ([01;31m[Klk-[m[K>locked && [01;31m[Klk-[m[K>cpu == mycpu());
+[35m[Kkernel/spinlock.c[m[K[36m[K-[m[K[32m[K81[m[K[36m[K-[m[K  return r;
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1641[m[K[36m[K-[m[K    80000b80:	0800                	addi	s0,sp,16
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K1642[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>name = name;
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1643[m[K[36m[K-[m[K    80000b82:	e50c                	sd	a1,8(a0)
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K1644[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>locked = 0;
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1645[m[K[36m[K-[m[K    80000b84:	00052023          	sw	zero,0(a0)
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K1646[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>cpu = 0;
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1647[m[K[36m[K-[m[K    80000b88:	00053823          	sd	zero,16(a0)
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1659[m[K[36m[K-[m[K  int r;
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K1660[m[K[36m[K:[m[K  r = ([01;31m[Klk-[m[K>locked && [01;31m[Klk-[m[K>cpu == mycpu());
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1661[m[K[36m[K-[m[K    80000b94:	411c                	lw	a5,0(a0)
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1672[m[K[36m[K-[m[K    80000ba4:	1000                	addi	s0,sp,32
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K1673[m[K[36m[K:[m[K  r = ([01;31m[Klk-[m[K>locked && [01;31m[Klk-[m[K>cpu == mycpu());
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1674[m[K[36m[K-[m[K    80000ba6:	6904                	ld	s1,16(a0)
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1743[m[K[36m[K-[m[K    80000c10:	f85ff0ef          	jal	80000b94 <holding>
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K1744[m[K[36m[K:[m[K  while(__sync_lock_test_and_set(&[01;31m[Klk-[m[K>locked, 1) != 0)
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1745[m[K[36m[K-[m[K    80000c14:	4705                	li	a4,1
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1747[m[K[36m[K-[m[K    80000c16:	e105                	bnez	a0,80000c36 <acquire+0x38>
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K1748[m[K[36m[K:[m[K  while(__sync_lock_test_and_set(&[01;31m[Klk-[m[K>locked, 1) != 0)
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1749[m[K[36m[K-[m[K    80000c18:	87ba                	mv	a5,a4
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1754[m[K[36m[K-[m[K    80000c22:	0330000f          	fence	rw,rw
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K1755[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>cpu = mycpu();
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1756[m[K[36m[K-[m[K    80000c26:	497000ef          	jal	800018bc <mycpu>
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1829[m[K[36m[K-[m[K    80000ca2:	c105                	beqz	a0,80000cc2 <release+0x30>
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K1830[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>cpu = 0;
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1831[m[K[36m[K-[m[K    80000ca4:	0004b823          	sd	zero,16(s1)
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1833[m[K[36m[K-[m[K    80000ca8:	0330000f          	fence	rw,rw
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K1834[m[K[36m[K:[m[K  __sync_lock_release(&[01;31m[Klk-[m[K>locked);
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K1835[m[K[36m[K-[m[K    80000cac:	0310000f          	fence	rw,w
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8811[m[K[36m[K-[m[K    80003ca6:	892e                	mv	s2,a1
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8812[m[K[36m[K:[m[K  initlock(&[01;31m[Klk-[m[K>lk, "sleep lock");
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8813[m[K[36m[K-[m[K    80003ca8:	00004597          	auipc	a1,0x4
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8816[m[K[36m[K-[m[K    80003cb2:	ec9fc0ef          	jal	80000b7a <initlock>
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8817[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>name = name;
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8818[m[K[36m[K-[m[K    80003cb6:	0324b023          	sd	s2,32(s1)
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8819[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>locked = 0;
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8820[m[K[36m[K-[m[K    80003cba:	0004a023          	sw	zero,0(s1)
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8821[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>pid = 0;
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8822[m[K[36m[K-[m[K    80003cbe:	0204a423          	sw	zero,40(s1)
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8842[m[K[36m[K-[m[K    80003cda:	84aa                	mv	s1,a0
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8843[m[K[36m[K:[m[K  acquire(&[01;31m[Klk-[m[K>lk);
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8844[m[K[36m[K-[m[K    80003cdc:	00850913          	addi	s2,a0,8
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8846[m[K[36m[K-[m[K    80003ce2:	f1dfc0ef          	jal	80000bfe <acquire>
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8847[m[K[36m[K:[m[K  while ([01;31m[Klk-[m[K>locked) {
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8848[m[K[36m[K-[m[K    80003ce6:	409c                	lw	a5,0(s1)
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8849[m[K[36m[K-[m[K    80003ce8:	c799                	beqz	a5,80003cf6 <acquiresleep+0x28>
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8850[m[K[36m[K:[m[K    sleep(lk, &[01;31m[Klk-[m[K>lk);
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8851[m[K[36m[K-[m[K    80003cea:	85ca                	mv	a1,s2
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8853[m[K[36m[K-[m[K    80003cee:	9bcfe0ef          	jal	80001eaa <sleep>
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8854[m[K[36m[K:[m[K  while ([01;31m[Klk-[m[K>locked) {
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8855[m[K[36m[K-[m[K    80003cf2:	409c                	lw	a5,0(s1)
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8857[m[K[36m[K-[m[K  }
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8858[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>locked = 1;
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8859[m[K[36m[K-[m[K    80003cf6:	4785                	li	a5,1
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8860[m[K[36m[K-[m[K    80003cf8:	c09c                	sw	a5,0(s1)
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8861[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>pid = myproc()->pid;
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8862[m[K[36m[K-[m[K    80003cfa:	be3fd0ef          	jal	800018dc <myproc>
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8864[m[K[36m[K-[m[K    80003d00:	d49c                	sw	a5,40(s1)
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8865[m[K[36m[K:[m[K  release(&[01;31m[Klk-[m[K>lk);
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8866[m[K[36m[K-[m[K    80003d02:	854a                	mv	a0,s2
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8887[m[K[36m[K-[m[K    80003d20:	84aa                	mv	s1,a0
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8888[m[K[36m[K:[m[K  acquire(&[01;31m[Klk-[m[K>lk);
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8889[m[K[36m[K-[m[K    80003d22:	00850913          	addi	s2,a0,8
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8891[m[K[36m[K-[m[K    80003d28:	ed7fc0ef          	jal	80000bfe <acquire>
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8892[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>locked = 0;
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8893[m[K[36m[K-[m[K    80003d2c:	0004a023          	sw	zero,0(s1)
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8894[m[K[36m[K:[m[K  [01;31m[Klk-[m[K>pid = 0;
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8895[m[K[36m[K-[m[K    80003d30:	0204a423          	sw	zero,40(s1)
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8898[m[K[36m[K-[m[K    80003d36:	9c0fe0ef          	jal	80001ef6 <wakeup>
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8899[m[K[36m[K:[m[K  release(&[01;31m[Klk-[m[K>lk);
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8900[m[K[36m[K-[m[K    80003d3a:	854a                	mv	a0,s2
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8923[m[K[36m[K-[m[K  
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8924[m[K[36m[K:[m[K  acquire(&[01;31m[Klk-[m[K>lk);
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8925[m[K[36m[K-[m[K    80003d5a:	00850913          	addi	s2,a0,8
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8927[m[K[36m[K-[m[K    80003d60:	e9ffc0ef          	jal	80000bfe <acquire>
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8928[m[K[36m[K:[m[K  r = [01;31m[Klk-[m[K>locked && ([01;31m[Klk-[m[K>pid == myproc()->pid);
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8929[m[K[36m[K-[m[K    80003d64:	409c                	lw	a5,0(s1)
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8931[m[K[36m[K-[m[K    80003d68:	4481                	li	s1,0
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8932[m[K[36m[K:[m[K  release(&[01;31m[Klk-[m[K>lk);
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8933[m[K[36m[K-[m[K    80003d6a:	854a                	mv	a0,s2
+[36m[K--[m[K
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8944[m[K[36m[K-[m[K    80003d7e:	e44e                	sd	s3,8(sp)
+[35m[Kkernel/kernel.asm[m[K[36m[K:[m[K[32m[K8945[m[K[36m[K:[m[K  r = [01;31m[Klk-[m[K>locked && ([01;31m[Klk-[m[K>pid == myproc()->pid);
+[35m[Kkernel/kernel.asm[m[K[36m[K-[m[K[32m[K8946[m[K[36m[K-[m[K    80003d80:	0284a983          	lw	s3,40(s1)
