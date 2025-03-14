@@ -66,7 +66,8 @@ release(struct spinlock *lk)
   // On RISC-V, sync_lock_release turns into an atomic swap:
   //   s1 = &lk->locked
   //   amoswap.w zero, zero, (s1)
-  __sync_lock_release(&lk->locked);
+  // __sync_lock_release(&lk->locked);
+  lk->locked = 0;
 
   pop_off();
 }
